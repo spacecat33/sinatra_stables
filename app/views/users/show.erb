@@ -1,0 +1,6 @@
+<p> Here are your horses, <%= @user.username %>
+<% @user.horses.each do |horse| %>
+  <div>
+    <%= horse.name %>
+  </div>
+<% end %>
