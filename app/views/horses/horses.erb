@@ -1,0 +1,12 @@
+<p> Here are your horses, <%= @user.username %>:
+<% @user.horses.each do |horse| %>
+  <div>
+    <%= horse.name %>
+  </div>
+<% end %>
+
+<br><br>
+<a href="/logout">Logout</a>
+
+<br><br>
+<a href="/horses/new">Add horse</a>

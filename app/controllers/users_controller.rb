@@ -1,10 +1,5 @@
 class UsersController < ApplicationController
 
-    get '/users/:slug' do
-        @user = User.find_by_slug(params[:slug])
-        erb :'users/show'
-    end
-
     get "/signup" do
         if !logged_in?
             erb :"users/signup", locals: {message: "Please sign up or login if your have an account"}
@@ -14,34 +9,31 @@ class UsersController < ApplicationController
     end
 
     post "/signup" do
-        user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
-
-        if user.save
-            redirect "/login"
+        if params[:username] == "" || params[:email] == "" || params[:password] == ""
+            redirect to '/signup'
         else
-            redirect "/failure"
+            @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
+            @user.save
+            session[:user_id] = @user.id
+            redirect to '/horses'
         end
     end
 
     get "/login" do
-        erb :"users/login"
-    end
-
-    post "/login" do
-        user = User.find_by(:username => params[:username])
-        if user && user.authenticate(params[:password])
-            session[:user_id] = user.id
-            redirect "/success"
+        if !logged_in?
+            erb :'users/login'
         else
-            redirect "/failure"
+            redirect to '/horses'
         end
     end
 
-    get "/success" do
-        if logged_in?
-            erb :success
+    post "/login" do
+        @user = User.find_by(:username => params[:username])
+        if @user && @user.authenticate(params[:password])
+            session[:user_id] = user.id
+            redirect "/horses"
         else
-            redirect "/login"
+            redirect "/failure"
         end
     end
 
@@ -50,8 +42,11 @@ class UsersController < ApplicationController
     end
 
     get "/logout" do
-        session.clear
-        redirect "/"
+        if logged_in?
+            session.destroy
+            redirect to '/login'
+        else
+            redirect to '/'
+        end
     end
-
 end

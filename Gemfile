@@ -12,6 +12,7 @@ gem 'shotgun'
 gem 'pry'
 gem 'bcrypt'
 gem 'sinatra-flash'
+gem 'faker'
 
 group :development, :test do
   gem 'tux'
