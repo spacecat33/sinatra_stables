@@ -18,6 +18,7 @@ class ApplicationController < Sinatra::Base
 	
 	get "/" do
 		@horses = Horse.all
+		@users = User.all
 		erb :index
 	end
 

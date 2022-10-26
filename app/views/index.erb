@@ -8,25 +8,44 @@
   height="50%"
   >
   <div class="col-md-8 col-md-offset-2">
-    <h2>Board your horses at Sinatra stables!</h2>
+    <h2>Board your horses at Sinatra stables!</h2><br>
 
-    <h3>All horses currently boarding here:</h3>
+    <div class="content">
+    Here you can board your horses at Sinatra stables. <br><br>
+    
+    These stables are used by real-life horse owners to help them keep track of what horses they have in their lives. <br><br>
+    
+    Scroll down to view the current list of horses and owners at Sinatra stables. <br><br>
+    Please note that if you click on a horse's name in the list, the webapp will divert you to the login page if you are not the owner of that chosen horse.<br><br> 
+    
+    To join Sinatra Stable, <a href="/signup">Sign Up</a>. If you are already a member, then <a href="/login">Log In</a>.
+    <br><br>
+  </div>
+
+  <br><br> <br><br> <br><br> <br><br> <br><br> <br><br><br><br>
+
+    <h3>All horses currently boarding at Sinatra Stables:</h3>
     <ol>
     <% @horses.each.with_index(1) do |horse, index| %>
-      <li><a href="/horses/<%=horse.id%>"><%=index%><%=horse.name%></a></li>
+      <li><a href="/horses/<%=horse.id%>"><%=index%>. <%=horse.name%></a> owned by <%=horse.user.username%></li><br>
     <%end%>
     </ol>
 
-    <div class="content">
-      Here you can add as many horses as you like to Sinatra stables along with horse riders. <br><br>
-      This app can be used by horse owners to help them keep track of what horses they have and which riders are exercising/competiting on each horse. <br><br>
-      To get started <a href="/signup">Sign Up</a> or <a href="/login">Log In</a>.
-      <br><br>
-    </div>
+    <br><br>
+
+    <h3>The list of top horse riders that keep their horses at Sinatra Stables:</h3><br>
+    <ol>
+    <% @users.each.with_index(1) do |user, index| %>
+      <li><%=index%>. <%=user.username%></li><br>
+    <%end%>
+    </ol>
+
+    <br><br>
+   
     
     
 
-    <br><br> <br><br> <br><br> <br><br> <br><br> <br><br>
+    
 
   </div>
 </div>

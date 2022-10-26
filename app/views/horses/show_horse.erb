@@ -18,7 +18,7 @@ If you forget, <%= @horse.name %> will neigh all night and bite you next time yo
 <br><br><br>
 
 <form method="POST" action="/horses/<%=@horse.id%>">
-    <input type="hidden" name="_method" value="DELETE"/>
+    <input type="hidden" id="hidden" name="_method" value="DELETE"/>
     <input type="submit" value="Sell this horse"/>
 </form>
 

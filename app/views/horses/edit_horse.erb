@@ -1,0 +1,13 @@
+<h1>Edit <%= @horse.name %></h1>
+
+<h2>Warning, Horses dont like having their names changed and have been known to not respond to their new names. </br><br>
+
+Proceed at your own risk...</h2>
+
+<form method="POST" action="/horses/<%=@horse.id%>">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+    <label for="horse_name"> Change this Horses Name to: </label>
+    <input type="text" name="horse[name]" id="horse_name" value="<%=@horse.name%>"><br><br>
+    <input type="submit" value="submit">
+</form>
+<br><br>

@@ -1,3 +1,4 @@
+require 'pry'
 class HorsesController < ApplicationController
     get '/horses' do
        if logged_in?
@@ -27,7 +28,7 @@ class HorsesController < ApplicationController
             @horse.user = @user
             @horse.save
                 if 
-                    redirect to "/horses/#{@horse.id}"
+                  redirect to "/horses/#{@horse.id}"
                 else
                   redirect to "/horses/new"
                 end
@@ -61,33 +62,35 @@ class HorsesController < ApplicationController
       end
       
       patch '/horses/:id' do
+        # binding.pry
         if logged_in?
-          if params[:name] == ""
+            if params[:name] == ""
             redirect to "/horses/#{params[:id]}/edit"
-          else
-            @horse = Horse.find_by_id(params[:id])
-            if @horse && @horse.user == current_user
-              if @horse.update(name: params[:name])
-                redirect to "/horses/#{@horse.id}"
-              else
-                redirect to "/horses/#{@horse.id}/edit"
-              end
             else
-              redirect to '/horses'
+                @horse = Horse.find(params[:id])
+                if @horse.user == current_user
+                   if @horse.update(name: params[:name])
+                    redirect to "/horses/#{@horse.id}"
+                    else
+                    redirect to "/horses/#{params[:id]}/edit"
+                    end
+                else
+                redirect to '/horses'
+                end
             end
-          end
         else
-          redirect to '/login'
+            redirect to 'login'
         end
-      end
+     end
       
-      delete '/horses/:id/delete' do
+      delete '/horses/:id' do
         if logged_in?
+          @user = current_user
           @horse = Horse.find_by_id(params[:id])
           if @horse && @horse.user == current_user
             @horse.delete
           end
-          redirect to '/tweets'
+          redirect to '/horses'
         else
           redirect to '/login'
         end
