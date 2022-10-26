@@ -1,4 +1,5 @@
-require 'pry'
+
+register Sinatra::Flash 
 class HorsesController < ApplicationController
     get '/horses' do
        if logged_in?
