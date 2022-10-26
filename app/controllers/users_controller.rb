@@ -4,7 +4,7 @@ class UsersController < ApplicationController
         if !logged_in?
             erb :"users/signup", locals: {message: "Please sign up or login if your have an account"}
         else
-            redirect to '/login'
+            redirect to '/horses'
         end
     end
 
@@ -23,13 +23,14 @@ class UsersController < ApplicationController
         if !logged_in?
             erb :'users/login'
         else
+            @user = current_user
             redirect to '/horses'
         end
     end
 
     post "/login" do
-        @user = User.find_by(:username => params[:username])
-        if @user && @user.authenticate(params[:password])
+        user = User.find_by(:username => params[:username])
+        if user && user.authenticate(params[:password])
             session[:user_id] = user.id
             redirect "/horses"
         else

@@ -1,5 +1,29 @@
+<h1>Welcome to <%= @horse.name %>'s stable!<h1><br>
+
+<h2>This horse is called <%= @horse.name %> and in case you forgot, belongs to you, <%= @user.username.upcase %>!</h2> 
+<br>
+<h3>Now, <%= @user.username.upcase %> Don't forget to put water in <%=@horse.name%>'s bucket and to feed, groom and exercise him today!
+<br>
+If you forget, <%= @horse.name %> will neigh all night and bite you next time you try to saddle them up!</h3>
+<br>
+<h3><a href="/horses">Go back to your stables</a></h3>
+
 <br><br>
+<a href="/horses/new">Add another horse</a>
+
+<br><br>
+
+<a href="/horses/<%=@horse.id%>/edit"> Edit this horse's details </a>
+
+<br><br><br>
+
+<form method="POST" action="/horses/<%=@horse.id%>">
+    <input type="hidden" name="_method" value="DELETE"/>
+    <input type="submit" value="Sell this horse"/>
+</form>
+
+<br>
 <a href="/logout">Logout</a> of your stable.
 
 <br><br>
-<a href="/horses/new">Add a horse</a>
+<br><br>

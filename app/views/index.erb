@@ -8,7 +8,14 @@
   height="50%"
   >
   <div class="col-md-8 col-md-offset-2">
-    <h2>Create your dream stable!</h2>
+    <h2>Board your horses at Sinatra stables!</h2>
+
+    <h3>All horses currently boarding here:</h3>
+    <ol>
+    <% @horses.each.with_index(1) do |horse, index| %>
+      <li><a href="/horses/<%=horse.id%>"><%=index%><%=horse.name%></a></li>
+    <%end%>
+    </ol>
 
     <div class="content">
       Here you can add as many horses as you like to Sinatra stables along with horse riders. <br><br>
@@ -16,8 +23,10 @@
       To get started <a href="/signup">Sign Up</a> or <a href="/login">Log In</a>.
       <br><br>
     </div>
+    
+    
 
-   
+    <br><br> <br><br> <br><br> <br><br> <br><br> <br><br>
 
   </div>
 </div>

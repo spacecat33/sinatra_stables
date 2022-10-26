@@ -1,7 +1,7 @@
 class HorsesController < ApplicationController
     get '/horses' do
-        @user = current_user
        if logged_in?
+         @user = current_user
          @horses = Horse.all
          erb :'horses/horses'
        else
@@ -18,13 +18,15 @@ class HorsesController < ApplicationController
     end
 
     post '/horses' do
-        @user = User.find_by(:username => params[:username])
       if logged_in?
+        @user = current_user
         if params[:name] == ""
           redirect to "/horses/new"
         else
-            @horse = current_user.horses.build(name: params[:name])
-                if @horse.save
+            @horse = Horse.create(params[:horse])
+            @horse.user = @user
+            @horse.save
+                if 
                     redirect to "/horses/#{@horse.id}"
                 else
                   redirect to "/horses/new"
@@ -37,7 +39,8 @@ class HorsesController < ApplicationController
       
     get '/horses/:id' do
         if logged_in?
-          @horse = Horse.find_by_id(params[:id])
+            @user = current_user
+            @horse = Horse.find_by_id(params[:id])
             erb :'horses/show_horse'
           else
             redirect to '/login'
