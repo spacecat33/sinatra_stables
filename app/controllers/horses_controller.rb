@@ -62,40 +62,14 @@ class HorsesController < ApplicationController
       end
       
       patch '/horses/:id' do
-        # binding.pry
-            if logged_in?
-                @user = current_user
-                @horse = Horse.find_by_id(params[:id])
-                if @horse && @horse.user == current_user
-                  @horse.update(name: params[:name])
-                end
-                redirect to '/horses'
-              else
-                redirect to '/login'
-              end
-            end
-
-
-
-            # if logged_in?
-        #     if params[:name] == ""
-        #     redirect to "/horses/#{params[:id]}/edit"
-        #     else
-        #         @horse = Horse.find(params[:id])
-        #         if @horse.user == current_user
-        #            if @horse.update(name: params[:name])
-        #             redirect to "/horses/#{@horse.id}"
-        #             else
-        #             redirect to "/horses/#{params[:id]}/edit"
-        #             end
-        #         else
-        #         redirect to '/horses'
-        #         end
-        #     end
-        # else
-        #     redirect to 'login'
-        # end
-    #  end
+        @horse = Horse.find_by_id(params[:id])
+        if logged_in? && @horse && @horse.user == current_user
+            @horse.update(params[:horse])
+            redirect to "/horses/#{@horse.id}"
+        else
+            redirect to '/horses'
+        end
+     end
       
       delete '/horses/:id' do
         if logged_in?
