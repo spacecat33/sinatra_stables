@@ -1,0 +1,20 @@
+<p> Add a new horse to your stable</p> 
+
+<form method="post" action="/horses">
+<label for="horse_name"> Name of Horse: </label>
+<input type="text" name="horse[name]" id="horse_name">
+<br><br>
+<label for="user_id">Choose an existing user/rider: </label><br><br>
+    <%User.all.each do |user|%>
+        <li>
+            <input type="radio" name="horse[user_id]" value="<%=user.id%>"" id="<%=user.id%>">
+            <%=user.username%>
+        </li>
+    <%end%>
+<br>
+<label for="user_name">Create a new user/rider</label><br><br>
+Username: <input type="text" name="user[username]" id="user_name" placeholder="username"> 
+<br><br>
+<input type="submit" value="Create Horse">
+
+<br><br>

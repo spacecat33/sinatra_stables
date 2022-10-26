@@ -1,12 +1,22 @@
-<p> Here are your horses, <%= @user.username %>:
+<p> This is your stable <%= @user.username %>:
+
+<br><br>
+<%if @user.horses.empty?%>   
+  <%="You do not have any horses."%>
+  <%else%>
+<ul>
 <% @user.horses.each do |horse| %>
-  <div>
-    <%= horse.name %>
+  <div> <%="The horses in your stable are listed below:"%>
+  <li><a href="/horses/<%=horse.id%>"><%= horse.name %></a></li>
   </div>
 <% end %>
+<%end%> 
+</ul>
 
 <br><br>
-<a href="/logout">Logout</a>
+<a href="/logout">Logout</a> of your stable.
 
 <br><br>
-<a href="/horses/new">Add horse</a>
+<a href="/horses/new">Add a horse</a>
+
+
