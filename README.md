@@ -24,6 +24,18 @@ To run this app on a local server:
 
     $ cd sinatra_stables
 
+    NOTE: This repository requires a .env file to store a Secret_Session key. Without one, you will see a cookie security warning in your terminal whenever you view this repository via the command, shotgun. To resolve, make sure you create a .env file. You are advised to include this .env file in your 'gitignore' file if you decide to push the repository to any public space such as Github. 
+
+    To generate a key, put the following command in your terminal: 
+
+    $ ruby -e "require 'securerandom'; puts SecureRandom.hex(64)" 
+
+    then, with the long key that is generated, store that in your .env file after the following text:      SECRET_SESSION:  
+
+    No quotation marks or spaces should be included. 
+
+    For further information, visit: https://rubydoc.info/gems/sinatra#session-secret-security .
+
 3. In your terminal, run:
 
     $ shotgun 
@@ -33,18 +45,22 @@ To run this app on a local server:
 5. You will see the Sinatra Stables welcome page. You made it! Explore! 
 
     You can make you own account or you can use these credentials to log in as a pre-made user:
-    username: ilovehorses 
+    username: Jane Smith 
     password: password
 
 If you encounter any problems or cannot access any test account, after re-running step 2 above in your terminal, run:
 
     $ bundle install 
 
-In your terminal run:  
+Then, in your terminal, run:  
 
     $ rake db:seed 
 
-Then continue from Step 3 as above ($ run shotgun)
+Run
+
+$ shotgun
+
+And select 'sign up' to create your own account as there will not be a test account that you can use once you have run the seed command above.
 
 
 

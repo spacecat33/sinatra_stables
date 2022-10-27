@@ -1,11 +1,20 @@
-
+<!DOCTYPE html>
 <h1>Welcome to <%= @horse.name %>'s stable!<h1><br>
+
+<img 
+src="/images/stable.jpg" 
+class="img-responsive stable-image"
+title="stable"
+width="40%" 
+height="20%"
+>
+
 
 <h2>This horse is called <%= @horse.name %> and in case you forgot, belongs to you, <%= @user.username.upcase %>!</h2> 
 <br>
 <h3>Now, <%= @user.username.upcase %> Don't forget to put water in <%=@horse.name%>'s bucket and to feed, groom and exercise him today!
 <br>
-If you forget, <%= @horse.name %> will neigh all night and bite you next time you try to saddle them up!</h3>
+If you forget, <%= @horse.name %> will neigh all night and bite you next time you try to saddle up!</h3>
 <br>
 <h3><a href="/horses">Go back to your stables</a></h3>
 
@@ -28,3 +37,4 @@ If you forget, <%= @horse.name %> will neigh all night and bite you next time yo
 
 <br><br>
 <br><br>
+

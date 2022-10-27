@@ -1,5 +1,4 @@
 
-register Sinatra::Flash 
 class HorsesController < ApplicationController
     get '/horses' do
        if logged_in?
@@ -43,11 +42,15 @@ class HorsesController < ApplicationController
         if logged_in?
             @user = current_user
             @horse = Horse.find_by_id(params[:id])
+            if @horse && @horse.user == current_user
             erb :'horses/show_horse'
-          else
+            else
             redirect to '/login'
-          end
+            end
+        else
+            redirect to '/login'
         end
+    end
       
       get '/horses/:id/edit' do
         if logged_in?
